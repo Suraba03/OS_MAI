@@ -1,2 +1,3 @@
 # OS_MAI
-labs dedicated to operating systems 
+operating systems labs
+Операционные системы МАИ
