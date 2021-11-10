@@ -39,7 +39,7 @@ int main()
         read(pipe1[0], &read_cnt, sizeof(int)); // read 3
 
         printf("[Child Process,  id=%d]: Reading from the pipe. Message is file name: %s\n", getpid(), read_file_name);
-        fflush(stdout);  
+        fflush(stdout);
         
         printf("[Child Process,  id=%d]: Reading from the pipe. Message is sequence of numbers: %s\n", getpid(), read_sequence_of_numbers);
         fflush(stdout);
@@ -57,11 +57,11 @@ int main()
         write_res = fopen(read_file_name, "w");
         fprintf(write_res, "%f", res);
         fclose(write_res);
-        printf("[Child Process,  id=%d]: result of sum is %f\n", getpid(), res);
+     /*   printf("[Child Process,  id=%d]: result of sum is %f\n", getpid(), res);
         fflush(stdout);
 
         printf("[Child Process,  id=%d]: writing result to file %s\n", getpid(), read_file_name);
-        fflush(stdout);
+        fflush(stdout);*/
 
         close(pipe1[0]);
         close(pipe1[1]);
@@ -99,4 +99,3 @@ int main()
     }
     return 0;
 }
-
