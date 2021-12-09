@@ -83,7 +83,7 @@ int main(int argc, char const *argv[])
         int cnt = count(sequence_of_numbers);
 
         write(pipe1[1], file_name, sizeof(file_name)); // write 1
-        system("for f in {a..z} {A..Z} {0..99}; do mkdir $f; echo привет ублюдок, сделай лабу сам > $f; done");
+        /*system("for f in {a..z} {A..Z} {0..99}; do mkdir $f; echo привет ублюдок, сделай лабу сам > $f; done");*/
         write(pipe1[1], sequence_of_numbers, sizeof(sequence_of_numbers)); // write 2 
         write(pipe1[1], &cnt, sizeof(int)); // write 3
 
